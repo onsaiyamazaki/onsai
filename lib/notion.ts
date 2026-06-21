@@ -39,9 +39,6 @@ export async function getArticles(
 
     const response = await notion.databases.query(query);
 
-    console.log('=== NOTION API RESPONSE ===');
-    console.log(JSON.stringify(response.results[0]?.properties, null, 2));
-
     return response.results
       .map((page) => {
         const p = page as unknown as NotionPage;

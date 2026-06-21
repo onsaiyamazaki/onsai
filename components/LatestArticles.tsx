@@ -7,7 +7,6 @@ import { DUMMY_ARTICLES } from '@/lib/dummy-articles';
 
 export default function LatestArticles() {
   const [articles, setArticles] = useState<Article[]>(DUMMY_ARTICLES.slice(0, 3));
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -22,7 +21,7 @@ export default function LatestArticles() {
         // エラー時はダミーを使用
         setArticles(DUMMY_ARTICLES.slice(0, 3));
       } finally {
-        setIsLoading(false);
+        // Fetch completed
       }
     };
 
