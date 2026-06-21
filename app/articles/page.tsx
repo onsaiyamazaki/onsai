@@ -2,14 +2,14 @@
 
 export const dynamic = "force-dynamic";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ArticleCard from '@/components/ArticleCard';
 import { Article, Tag } from '@/types';
 import { TAG_LIST } from '@/config/tags';
 import { DUMMY_ARTICLES } from '@/lib/dummy-articles';
 
-export default function ArticlesPage() {
+function ArticlesPageContent() {
   const searchParams = useSearchParams();
   const tagParam = searchParams.get('tag') as Tag | null;
 
@@ -150,5 +150,13 @@ export default function ArticlesPage() {
         </div>
       </section>
     </>
+  );
+}
+
+export default function ArticlesPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ArticlesPageContent />
+    </Suspense>
   );
 }
