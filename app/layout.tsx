@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   description:
     'Discover Japanese shrines, fortune telling, and power spots. Your guide to spiritual travel in Japan.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://onsai.com'),
+  verification: {
+    google: 'SWCtikqItnBSRtafdVgDxXTiKvfzruxVmRHjKAMKybc',
+  },
   openGraph: {
     title: 'ONSAI',
     description: 'Discover Japanese shrines, fortune telling, and power spots',
