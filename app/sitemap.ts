@@ -1,46 +1,46 @@
 import { MetadataRoute } from 'next';
-import { getArticles, getTags } from '@/lib/notion';
+import { getArticles } from '@/lib/notion';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://onsai.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://onsai-site.vercel.app';
 
-  const articles = await getArticles();
-  const tags = await getTags();
-
-  const articleEntries = articles.map((article) => ({
-    url: `${baseUrl}/articles/${article.slug}`,
-    lastModified: article.published,
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }));
-
-  const tagEntries = tags.map((tag) => ({
-    url: `${baseUrl}/articles?tag=${encodeURIComponent(tag)}`,
-    lastModified: new Date().toISOString(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.8,
-  }));
-
-  return [
+  // 静的ページ
+  const staticPages: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
-      lastModified: new Date().toISOString(),
-      changeFrequency: 'daily',
-      priority: 1.0,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 1,
     },
     {
       url: `${baseUrl}/articles`,
-      lastModified: new Date().toISOString(),
+      lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.9,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: new Date().toISOString(),
+      lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.5,
     },
-    ...tagEntries,
-    ...articleEntries,
   ];
+
+  // 記事ページ（Notion から動的取得）
+  try {
+    const articles = await getArticles();
+    const articlePages: MetadataRoute.Sitemap = articles
+      .filter((article) => article.slug)
+      .map((article) => ({
+        url: `${baseUrl}/articles/${article.slug}`,
+        lastModified: article.published ? new Date(article.published) : new Date(),
+        changeFrequency: 'weekly' as const,
+        priority: 0.8,
+      }));
+
+    return [...staticPages, ...articlePages];
+  } catch (error) {
+    console.error('Failed to fetch articles for sitemap:', error);
+    return staticPages;
+  }
 }
