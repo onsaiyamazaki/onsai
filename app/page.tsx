@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { TAG_LIST } from '@/config/tags';
-import { DUMMY_ARTICLES } from '@/lib/dummy-articles';
 import LatestArticles from '@/components/LatestArticles';
 
 export default function Home() {
@@ -11,7 +10,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="container relative mx-auto px-4 text-center">
           <h1 className="mb-4 text-6xl font-serif font-bold leading-tight">
-            Discover Japan's Spiritual Path
+            Discover Japan&apos;s Spiritual Path
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-xl text-cream/90">
             Explore ancient shrines, master fortune telling, and visit powerful
