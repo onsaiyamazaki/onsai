@@ -1,4 +1,4 @@
-import { getArticles, getArticleBySlug, getTags } from '@/lib/notion';
+import { getArticles, getArticleBySlug } from '@/lib/notion';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
