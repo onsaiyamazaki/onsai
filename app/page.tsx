@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import ArticleCard from '@/components/ArticleCard';
 import { TAG_LIST } from '@/config/tags';
 import { DUMMY_ARTICLES } from '@/lib/dummy-articles';
 import LatestArticles from '@/components/LatestArticles';

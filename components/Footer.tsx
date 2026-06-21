@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <h3 className="mb-4 text-lg font-serif font-bold">ONSAI</h3>
             <p className="text-sm text-cream/80">
-              Discover Japan's spiritual path through shrines, fortune telling,
+              Discover Japan&apos;s spiritual path through shrines, fortune telling,
               and power spots.
             </p>
           </div>
